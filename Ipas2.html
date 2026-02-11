@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edukasi Lingkungan</title>
+    <style>
+        /* --- GAYA TAMPILAN (CSS) --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Kotak Tampilan (Seperti Layar HP/App) */
+        .app-container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            min-height: 80vh;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Judul */
+        h1, h2, h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* --- LOGIKA LAYAR (SCREEN) --- */
+        .screen {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .screen.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- TOMBOL NAVIGASI ATAS (BARU) --- */
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .btn-top {
+            padding: 8px 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            color: #555;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-top:hover {
+            background-color: #e2e6ea;
+            color: #000;
+        }
+
+        /* --- TOMBOL MENU UTAMA --- */
+        .menu-btn {
+            display: block;
+            width: 100%;
+            padding: 20px;
+            margin: 15px 0;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: left;
+        }
+
+        .menu-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-air { background: linear-gradient(to right, #2193b0, #6dd5ed); }
+        .btn-tanah { background: linear-gradient(to right, #d38312, #a83279); }
+        .btn-udara { background: linear-gradient(to right, #bdc3c7, #2c3e50); }
+
+        /* --- TOMBOL KEMBALI --- */
+        .btn-back {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+        }
+        .btn-back:hover {
+            background-color: #c0392b;
+        }
+
+        /* --- KONTEN & PROFIL --- */
+        .content {
+            line-height: 1.8;
+            color: #555;
+            text-align: justify;
+        }
+        
+        /* Gaya Khusus Halaman About */
+        .profile-card {
+            background: linear-gradient(to bottom right, #ffffff, #f0f0f0);
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #4facfe;
+            margin-bottom: 15px;
+            background-color: #eee;
+        }
+
+        .profile-info h3 { margin: 10px 0 5px 0; color: #222; }
+        .profile-info p { margin: 5px 0; color: #666; font-size: 15px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+
+        <div id="screen-menu" class="screen active">
+            
+            <div class="nav-header">
+                <button class="btn-top" onclick="pindahKe('screen-menu')">
+                    🏠 Home
+                </button>
+                <button class="btn-top" onclick="pindahKe('screen-about')">
+                    👤 About
+                </button>
+            </div>
+
+            <h1>🌍 Edukasi Lingkungan</h1>
+            <p style="text-align: center; margin-bottom: 30px;">Pilih topik yang ingin dipelajari:</p>
+            
+            <button class="menu-btn btn-air" onclick="pindahKe('screen-air')">
+                💧 Pencemaran Air
+            </button>
+            
+            <button class="menu-btn btn-tanah" onclick="pindahKe('screen-tanah')">
+                🌱 Pencemaran Tanah
+            </button>
+            
+            <button class="menu-btn btn-udara" onclick="pindahKe('screen-udara')">
+                💨 Pencemaran Udara
+            </button>
+        </div>
+
+        <div id="screen-about" class="screen">
+            <h2>Tentang Pembuat</h2>
+            
+            <div class="profile-card">
+                <img src="profil.jpg" alt="Foto Profil" class="profile-img" onerror="this.src='https://via.placeholder.com/150?text=Foto+Anda'">
+                
+                <div class="profile-info">
+                    <h3>NAMA ANDA</h3>
+                    <p><strong>NIM / Absen:</strong> 12345678</p>
+                    <p><strong>Kelas:</strong> XII IPA 1</p>
+                    <p><strong>Sekolah/Kampus:</strong> SMA Harapan Bangsa</p>
+                    <hr style="border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
+                    <p><em>"Aplikasi ini dibuat sebagai tugas mata pelajaran TIK untuk meningkatkan kesadaran lingkungan."</em></p>
+                </div>
+            </div>
+
+            <button class="btn-back" onclick="pindahKe('screen-menu')">⬅ Kembali ke Menu</button>
+        </div>
+
+        <div id="screen-air" class="screen">
+            <h2>Pencemaran Air</h2>
+           <img src="air.jpg" alt="Pencemaran Air" style="width:100%; border-radius:10px; margin-bottom:20px;">
+
+            <div class="content">
+                <h3>Apa Itu Pencemaran Air?</h3>
+                <p>
+                    Pencemaran air merupakan salah satu tantangan lingkungan paling serius yang dihadapi umat manusia di abad modern ini. Air adalah elemen vital yang menjadi fondasi bagi seluruh bentuk kehidupan di Bumi, namun ironisnya, sumber daya yang sangat berharga ini terus mengalami degradasi kualitas akibat aktivitas manusia yang tidak bertanggung jawab. Secara definisi, pencemaran air terjadi ketika zat-zat berbahaya, baik berupa bahan kimia, mikroorganisme, maupun limbah padat, masuk ke dalam badan air seperti sungai, danau, lautan, hingga air tanah. Masuknya polutan ini menyebabkan perubahan karakteristik fisik, kimia, dan biologis air, sehingga air tersebut tidak lagi layak untuk dikonsumsi, digunakan untuk keperluan pertanian, atau bahkan untuk mendukung kehidupan ekosistem di dalamnya.
+                </p>
+
+                <p>
+                    Penyebab utama dari krisis ini sangatlah beragam, namun sebagian besar berakar pada pola konsumsi dan produksi manusia. Limbah industri sering kali menjadi terdakwa utama, di mana pabrik-pabrik membuang sisa operasional yang mengandung logam berat beracun seperti merkuri, timbal, dan kadmium langsung ke aliran sungai tanpa melalui proses pengolahan yang benar. Di sisi lain, limbah domestik dari sektor rumah tangga juga memberikan kontribusi yang sangat signifikan. Penggunaan deterjen berbahan kimia keras, pembuangan sampah plastik ke selokan, hingga sistem pembuangan kotoran yang tidak terintegrasi menyebabkan air di wilayah perkotaan menjadi keruh dan berbau menyengat. Selain itu, sektor pertanian juga memiliki sisi gelap melalui penggunaan pupuk kimia dan pestisida yang berlebihan. Ketika hujan turun, zat-zat kimia tersebut hanyut ke sungai dan menyebabkan fenomena eutrofikasi, yaitu ledakan pertumbuhan tanaman air yang menghabiskan cadangan oksigen sehingga membunuh ikan-ikan di bawahnya.
+                </p>
+
+                <p>
+                    Dampak yang ditimbulkan oleh pencemaran air sungguh mengerikan dan bersifat domino. Dari sisi kesehatan manusia, air yang tercemar merupakan sarang bagi berbagai patogen penyebab penyakit mematikan seperti kolera, disentri, dan tipus. Paparan jangka panjang terhadap air yang terkontaminasi logam berat bahkan dapat menyebabkan kerusakan organ permanen, gangguan saraf, hingga risiko kanker. Bagi lingkungan, pencemaran air menghancurkan keanekaragaman hayati; terumbu karang mati, ikan-ikan kehilangan habitat, dan rantai makanan terputus. Selain itu, secara ekonomi, pencemaran air membuat biaya pembersihan air bersih menjadi sangat mahal, merugikan sektor perikanan, dan menurunkan kualitas hidup masyarakat yang tinggal di bantaran sungai. Kita sedang berada di titik di mana krisis air bersih bukan lagi ancaman masa depan, melainkan kenyataan pahit yang sudah mulai kita rasakan hari ini.
+                </p>
+
+                <p>
+                    Oleh karena itu, sebelum semuanya terlambat, mari kita bangun kesadaran kolektif untuk berhenti mencemari air sekarang juga. Perubahan besar selalu dimulai dari langkah-langkah kecil di rumah kita sendiri. Kita bisa mulai dengan tidak membuang sampah sekecil apa pun ke aliran air, mengurangi penggunaan plastik sekali pakai, dan beralih ke produk pembersih yang ramah lingkungan. Bagi para pelaku industri, kewajiban mengelola limbah bukan sekadar aturan hukum, melainkan tanggung jawab moral bagi generasi mendatang. Ingatlah bahwa air yang kita cemari hari ini adalah air yang akan diminum oleh anak cucu kita di masa depan. Mari kita jaga kemurnian air, lindungi sungai kita, dan lestarikan laut kita. Air yang bersih adalah cermin dari peradaban yang bersih. Sayangi lingkunganmu, jangan biarkan setetes pun air tercemar oleh kelalaian kita, karena menjaga air berarti menjaga kehidupan itu sendiri.
+                </p>
+                
+                <p style="background: #e1f5fe; padding: 15px; border-radius: 10px; border-left: 5px solid #2193b0;">
+                    <strong>Ajakan:</strong> Mari menjadi pahlawan lingkungan hari ini. Gunakan air secukupnya dan pastikan tidak ada limbah berbahaya yang keluar dari rumah Anda menuju selokan. Satu tindakan kecil Anda adalah nafas bagi bumi.
+                </p>
+            </div>
+
+        <div id="screen-tanah" class="screen">
+            <h2>Pencemaran Tanah</h2>
+            <div style="width:100%; height:150px; background:#d38312; border-radius:10px; display:flex; align-items:center; justify-content:center; color:white; margin-bottom:20px;">
+                [attachment_1](attachment)
+            </div>
+
+            <div class="content">
+                <h3>Apa Itu Pencemaran Tanah?</h3>
+                <p>Kondisi dimana bahan kimia buatan manusia masuk dan mengubah lingkungan tanah alami. Penyebab utamanya adalah sampah plastik yang sulit terurai dan limbah B3.</p>
+                <h3>Dampak</h3>
+                <p>Tanah menjadi tidak subur, air tanah tercemar, dan tumbuhan mati.</p>
+            </div>
+            <button class="btn-back" onclick="pindahKe('screen-menu')">⬅ Kembali ke Menu</button>
+        </div>
+
+        <div id="screen-udara" class="screen">
+            <h2>Pencemaran Udara</h2>
+            <div style="width:100%; height:150px; background:#2c3e50; border-radius:10px; display:flex; align-items:center; justify-content:center; color:white; margin-bottom:20px;">
+                [attachment_2](attachment)
+            </div>
+
+            <div class="content">
+                <h3>Apa Itu Pencemaran Udara?</h3>
+                <p>Kehadiran substansi fisik atau kimia di atmosfer yang membahayakan kesehatan makhluk hidup. Asap kendaraan dan pembakaran sampah adalah penyebab utamanya.</p>
+                <h3>Dampak</h3>
+                <p>Gangguan pernapasan (ISPA), pemanasan global, dan hujan asam.</p>
+            </div>
+            <button class="btn-back" onclick="pindahKe('screen-menu')">⬅ Kembali ke Menu</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Fungsi untuk pindah layar
+        function pindahKe(idTujuan) {
+            // Sembunyikan semua layar
+            const semuaLayar = document.querySelectorAll('.screen');
+            semuaLayar.forEach(layar => {
+                layar.classList.remove('active');
+            });
+
+            // Munculkan layar tujuan
+            const layarTujuan = document.getElementById(idTujuan);
+            if (layarTujuan) {
+                layarTujuan.classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
